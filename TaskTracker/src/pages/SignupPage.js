@@ -58,7 +58,7 @@ const validate = (account) => {
 
 // ----------------------------------------------------------------------
 
-export default function SigninPage() {
+export default function SignupPage() {
     const mdUp = useResponsive('up', 'md');
     const navigate = useNavigate();
     const [account2, setAccount] = useState({

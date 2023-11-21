@@ -24,7 +24,8 @@ import Approver from './pages/projectdetail/Approver/ProjectDetail';
 import Supporter from './pages/projectdetail/Supporter/ProjectDetail';
 import ProfilePage from './pages/profile/profile';
 import Settings from './pages/settings_p/notificaitons';
-import SigninPage from './pages/SigninPage';
+import SignupPage from './pages/SignupPage';
+import ForgotPassword from './pages/ForgotPassword';
 
 // ----------------------------------------------------------------------
 
@@ -53,8 +54,12 @@ export default function Router() {
       element: <LoginPage />,
     },
     {
-      path: "signin",
-      element: <SigninPage/>
+      path: "signup",
+      element: <SignupPage/>
+    },
+    {
+      path: "forgot-password",
+      element: <ForgotPassword/>
     },
     {
       element: <SimpleLayout />,

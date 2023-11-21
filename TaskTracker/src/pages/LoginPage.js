@@ -2,7 +2,8 @@ import { Helmet } from 'react-helmet-async';
 // @mui
 import { styled } from '@mui/material/styles';
 import { Container, Typography, Divider, Stack, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation  } from 'react-router-dom';
+import { toast } from 'react-toastify';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
@@ -43,7 +44,10 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 export default function LoginPage() {
   const mdUp = useResponsive('up', 'md');
-
+  // const { state } = useLocation();
+  // if (state && state.showToast) {
+  //   toast(state.message);
+  // }
   return (
     <>
       <Helmet>
@@ -76,7 +80,7 @@ export default function LoginPage() {
 
             <Typography variant="body2" sx={{ mb: 5 }}>
               Bạn chưa có tài khoản? {''}
-              <Link to={"/signin"} variant="subtitle2">Đăng ký</Link>
+              <Link to={"/signup"} variant="subtitle2">Đăng ký</Link>
             </Typography>
 
             <Stack direction="row" spacing={2}>

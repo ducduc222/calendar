@@ -29,7 +29,6 @@ export default function LoginForm() {
         if (item.username === username.current.value && item.password === password.current.value) {
           sessionStorage.setItem("username", username.current.value);
           navigate("/dashboard", { replace: true });
-
         }
       })
     } else {
@@ -70,7 +69,7 @@ export default function LoginForm() {
           <Checkbox name="remember" label="Remember me" />
           Nhớ mật khẩu
         </Grid>
-        <Link variant="subtitle2" underline="hover">
+        <Link to="/forgot-password" variant="subtitle2" underline="hover">
           Quên mật khẩu?
         </Link>
       </Stack>
