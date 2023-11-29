@@ -32,6 +32,7 @@
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
     "framer-motion": "^10.16.5",
+    "moment": "^2.29.4",
     "mui-one-time-password-input": "^2.0.1",
     "muuri": "^0.9.5",
     "notistack": "^3.0.1",

@@ -77,7 +77,7 @@ const ForgotPassword = () => {
                     <div style={{display: 'flex', justifyContent:'flex-end'}}>
                         <Link to="/login" >Quay lại trang đăng nhập</Link>
                     </div>
-                    <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
+                    <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={()=>handleClick}>
                         Tiếp tục
                     </LoadingButton>
                 </Stack>
@@ -86,7 +86,7 @@ const ForgotPassword = () => {
                     <h2>Xác thực OTP</h2>
                     <div>Nhập mã chúng tôi đã gửi đến truo**@***.com</div>
                     <MuiOtpInput length={6} value={otp} onChange={handleChange} />
-                    <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
+                    <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={()=>handleClick}>
                         Tiếp tục
                     </LoadingButton>
                     <div style={{display: 'flex', justifyContent: 'center'}}>Không nhận được mã? <StyledReSend>Gửi lại</StyledReSend></div>
@@ -97,7 +97,7 @@ const ForgotPassword = () => {
                     <span>Mật khẩu của bạn phải dài từ 8 đến 16 ký tự, phải chứa ít nhất 1 ký tự viết hoa, 1 ký tự viết thường, 1 ký tự số và 1 ký tự đặc biệt</span>
                     <TextField id="password" label="Mật khẩu mới" variant="outlined" />
                     <TextField id="confirm-password" label="Xác nhận mật khẩu " variant="outlined" />
-                    <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
+                    <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={()=>handleClick}>
                         Xác nhận
                     </LoadingButton>
                 </Stack>

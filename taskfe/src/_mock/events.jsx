@@ -95,7 +95,7 @@ const monthEvents = [...Array(30)].map((_, index) => ({
 const todayEvent = [{
   id: 30,
   title: 'Thể dục',
-  color: '#1890FF',
+  color: '#54D62C',
   allDay: sample(true, false),
   repeat: sample(['none', 'Every day', 'Every week', 'Every month']),
   alert: sample(['none', 'Every day', 'Every week', 'Every month']),

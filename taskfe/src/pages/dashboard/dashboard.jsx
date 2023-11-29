@@ -1,5 +1,6 @@
 import FullCalendar from '@fullcalendar/react'; // => request placed at the top
 import listPlugin from '@fullcalendar/list';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
 import { Helmet } from 'react-helmet-async';
 // import { faker } from '@faker-js/faker';
 // @mui
@@ -10,7 +11,6 @@ import account from '../../_mock/account';
 // sections
 import {
   // AppTasks,
-  AppNewsUpdate,
   // AppOrderTimeline,
   // AppCurrentVisits,
   CustomizedTimeline,
@@ -22,13 +22,48 @@ import {
 } from '../../sections/@dashboard/app';
 
 import { fDate } from '../../utils/formatTime';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { countEventsToday, getEventsToday } from '../../services/events/getEventToday';
+import { toast } from 'react-toastify';
+import moment from 'moment';
+import { Timeline } from '@mui/lab';
 
 // ----------------------------------------------------------------------
 
 export default function DashboardAppPage() {
   // const theme = useTheme();
+  const [totalEvent, setTotalEvent] = useState(0);
+  const [eventsToday, setEventsToday] = useState([]);
+  // const [dataCurrent, setDataCurrent] = useState([]);
+  // const [dataLastWeek, setDataLastWeek] = useState([]);
+  const { token } = useContext(AuthContext);
+  console.log(token);
+  const fetchData = async () => {
+    try {
+      const res = await getEventsToday(token);
+      if (res.responseCode === 200) {
+        setEventsToday(res.data);
+      } else {
+        toast.error(res.response.data.message)
+      }
+    } catch (error) { }
+  };
 
-
+  const fetchCount = async () => {
+    try {
+      const res = await countEventsToday(token);
+      if (res.responseCode === 200) {
+        setTotalEvent(res.data);
+      } else {
+        toast.error(res.response.data.message)
+      }
+    } catch (error) { }
+  };
+  useEffect(() => {
+    fetchData();
+    fetchCount();
+  }, []);
   return (
     <>
       <Helmet>
@@ -37,7 +72,7 @@ export default function DashboardAppPage() {
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome {account.displayName}! 
+          Hi, Welcome {account.displayName}!
         </Typography>
         <Typography variant="h5" sx={{ mb: 5 }}>
           Today {fDate(new Date())} , you have
@@ -45,32 +80,27 @@ export default function DashboardAppPage() {
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={3} md={6}>
-            <AppWidgetSummary title="Schedule" total={5} icon={'bi:calendar-week'} />
+            <AppWidgetSummary title="Schedule" total={totalEvent} icon={'bi:calendar-week'} />
           </Grid>
-
-          <Grid item xs={12} sm={3} md={6}>
-            <AppWidgetSummary title="Task" total={2} color="info" icon={'bi:card-checklist'} />
-          </Grid>
-
-
-           
-
-         
 
           <Grid item xs={12} md={6} lg={5} >
-          <Card sx={{height:'100%', paddingTop:'46px'}}>
-          <CustomizedTimeline />
-        </Card>
+            <Card sx={{ height: '100%', paddingTop: '46px' }}>
+              {/* <CustomizedTimeline /> */}
+              <Timeline position="alternate">
+
+                {eventsToday.map((event, index) => (
+                  <CustomizedTimeline
+                    index={index}
+                    time={moment(event.start).format("hh:mm") + " - " + moment(event.end).format("hh:mm")}
+                    icon={<FastfoodIcon />}
+                    title={event.title}
+                    content={event.descripton} />
+                ))}
+              </Timeline>
+            </Card>
           </Grid>
 
-          <Grid item xs={12} md={6} lg={7}  >
-            <AppNewsUpdate
-              title="Tasks"
-            />
-          </Grid>
-       
-
-        <Grid item xs={12} md={12} lg={12}>
+          <Grid item xs={12} md={12} lg={12}>
             <AppWebsiteVisits
               title="Schedule"
               subheader="(-30%) than last week"
@@ -99,7 +129,7 @@ export default function DashboardAppPage() {
               ]}
             />
           </Grid>
-          </Grid>
+        </Grid>
       </Container>
     </>
   );

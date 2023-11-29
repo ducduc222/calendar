@@ -8,7 +8,6 @@ import Iconify from '../components/iconify';
 import account from '../_mock/account';
 // sections
 import {
-  AppTasks,
   // AppNewsUpdate,
   AppOrderTimeline,
   // AppCurrentVisits,
@@ -32,7 +31,7 @@ export default function DashboardAppPage() {
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome {account.displayName}! 
+          Hi, Welcome {account.displayName}!
         </Typography>
         <Typography variant="h5" sx={{ mb: 5 }}>
           Today, you have
@@ -42,15 +41,6 @@ export default function DashboardAppPage() {
           <Grid item xs={12} sm={6} md={4}>
             <AppWidgetSummary title="Schedule" total={5} icon={'bi:calendar-week'} />
           </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Task" total={2} color="info" icon={'bi:card-checklist'} />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={4}>
-            <AppWidgetSummary title="Project" total={3} color="warning" icon={'bi:people'} />
-          </Grid>
-
 
           {/* <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
@@ -197,19 +187,6 @@ export default function DashboardAppPage() {
                   value: 443232,
                   icon: <Iconify icon={'eva:twitter-fill'} color="#1C9CEA" width={32} />,
                 },
-              ]}
-            />
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-            <AppTasks
-              title="Tasks"
-              list={[
-                { id: '1', label: 'Create FireStone Logo' },
-                { id: '2', label: 'Add SCSS and JS files if required' },
-                { id: '3', label: 'Stakeholder Meeting' },
-                { id: '4', label: 'Scoping & Estimations' },
-                { id: '5', label: 'Sprint Showcase' },
               ]}
             />
           </Grid>

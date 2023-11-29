@@ -40,10 +40,14 @@ export default function AccountPopover() {
   };
 
   const handleClose = () => {
-    sessionStorage.removeItem("username");
-    navigate("/login");
     setOpen(null);
   };
+
+  const handleLoggout = () => {
+    localStorage.removeItem('token');
+    navigate("/login");
+    setOpen(null);
+  }
 
   return (
     <>
@@ -98,14 +102,14 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem component={Link} to={option.link} onClick={handleClose}>{option.label}</MenuItem>
+            <MenuItem key={option} component={Link} to={option.link} onClick={handleClose}>{option.label}</MenuItem>
           ))}
         
         </Stack>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLoggout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

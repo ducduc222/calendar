@@ -43,4 +43,7 @@ public class UserEntity extends BaseEntity {
     )
     @JsonManagedReference
     private List<Role> roles;
+
+    @Column(name = "is_deleted", columnDefinition = "boolean default false")
+    private boolean isDeleted;
 }

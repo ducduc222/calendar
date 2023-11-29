@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
 //                        .requestMatchers("/**").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/event/**").permitAll()
 
 //                        .requestMatchers(HttpMethod.DELETE, "/admin/return_orders/**").hasAnyAuthority(RoleType.ADMIN.name(), RoleType.SALE.name())
                 )

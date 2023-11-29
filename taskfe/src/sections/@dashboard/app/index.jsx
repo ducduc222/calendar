@@ -1,4 +1,3 @@
-export { default as AppNewsUpdate } from './AppNewsUpdate';
 export { default as AppCurrentVisits } from './AppCurrentVisits';
 export { default as CustomizedTimeline} from './CustomizedTimeline';
 export { default as AppTrafficBySite } from './AppTrafficBySite';
