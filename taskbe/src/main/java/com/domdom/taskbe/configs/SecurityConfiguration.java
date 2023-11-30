@@ -31,6 +31,7 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/**").permitAll()
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/event/**").permitAll()
+                                .requestMatchers("/password/*").permitAll()
 
 //                        .requestMatchers(HttpMethod.DELETE, "/admin/return_orders/**").hasAnyAuthority(RoleType.ADMIN.name(), RoleType.SALE.name())
                 )

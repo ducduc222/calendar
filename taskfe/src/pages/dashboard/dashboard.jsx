@@ -37,7 +37,7 @@ export default function DashboardAppPage() {
   const [eventsToday, setEventsToday] = useState([]);
   // const [dataCurrent, setDataCurrent] = useState([]);
   // const [dataLastWeek, setDataLastWeek] = useState([]);
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   console.log(token);
   const fetchData = async () => {
     try {
@@ -72,7 +72,7 @@ export default function DashboardAppPage() {
 
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome {account.displayName}!
+          Hi, Welcome {user.fullName}!
         </Typography>
         <Typography variant="h5" sx={{ mb: 5 }}>
           Today {fDate(new Date())} , you have

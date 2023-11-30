@@ -13,6 +13,18 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   main:
     web-application-type: servlet
+  mail:
+    host: smtp.gmail.com
+    port: 857
+    username: ducduc28052002@gmail.com
+    password: ksadiufqegfjklho
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable:true
+          auth: true
+
 
 application:
   security:

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -8,6 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
 // mocks_
 import account from '../../../_mock/account';
+import { AuthContext } from '../../../context/AuthContext';
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +49,8 @@ export default function AccountPopover() {
     navigate("/login");
     setOpen(null);
   }
-
+  const {user} = useContext(AuthContext)
+  console.log(user);
   return (
     <>
       <IconButton
@@ -90,10 +92,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {user.fullName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {user.fullName}
             {account.isEmailVerified && <CheckCircleIcon sx={{ ml: 1, verticalAlign: 'middle' }} />}
           </Typography>
         </Box>

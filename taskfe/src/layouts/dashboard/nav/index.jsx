@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
@@ -14,6 +14,7 @@ import Scrollbar from '../../../components/scrollbar';
 import NavSection from '../../../components/nav-section';
 //
 import navConfig from './config';
+import { AuthContext } from '../../../context/AuthContext';
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +47,7 @@ export default function Nav({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
-
+  const {user} = useContext(AuthContext);
   useEffect(() => {
     if (openNav) {
       onCloseNav();
@@ -77,7 +78,7 @@ export default function Nav({ openNav, onCloseNav }) {
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {user.fullName}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>

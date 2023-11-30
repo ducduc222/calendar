@@ -6,11 +6,11 @@ const request = axios.create({
     baseURL: 'http://localhost:8080',
 });
 
-// const startToday = moment().startOf('day').valueOf();
+const startToday = moment().startOf('day').valueOf();
 const endToday = moment().endOf('day').valueOf();
 const data = {
-    startDate: 0,
-    endDate: 178855419871
+    startDate: startToday,
+    endDate: endToday
 }
 export const getEventsToday = async (token) => {
     const headers = createAuthHeader(token);

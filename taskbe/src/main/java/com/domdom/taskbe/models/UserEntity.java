@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -29,9 +27,9 @@ public class UserEntity extends BaseEntity {
     private String password;
     @Column(unique = true)
     private String email;
+    private long birthday;
     private String address;
 
-    private Date dob;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;

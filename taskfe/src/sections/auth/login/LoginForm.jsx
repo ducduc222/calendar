@@ -28,7 +28,7 @@ export default function LoginForm() {
       login(payload)
         .then((res) => {
           const token = res.data.token;
-          const user = res.data.user;
+          const user = res.data.userInfoDto;
           handleLoggedin(token, user);
           navigate('/dashboard')
         })

@@ -1,28 +1,22 @@
-package com.domdom.taskbe.dtos.auth;
+package com.domdom.taskbe.dtos;
 
-import com.domdom.taskbe.models.Role;
-import com.domdom.taskbe.models.enums.*;
+import com.domdom.taskbe.models.enums.Gender;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
-import java.util.List;
-
 @Getter
 @Setter
-public class UserInfoDto {
+public class UserUpdateDto {
     private Integer id;
 
     private String fullName;
 
-    private boolean isActive;
 
     private String email;
 
     private String address;
     private long birthday;
 
-
     private Gender gender;
-    private List<Role> roles;
 }
