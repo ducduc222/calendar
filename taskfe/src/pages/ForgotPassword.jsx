@@ -48,7 +48,7 @@ const ForgotPassword = () => {
     const mdUp = useResponsive('up', 'md');
     const handleSendMail = async () => {
         try {
-            const res = await sendEmail({email:email})
+            const res = await sendEmail({ email: email })
             console.log(res);
             if (res.responseCode === 200) {
                 toast.success("Một otp đã được gửi về email của bạn")
@@ -89,7 +89,9 @@ const ForgotPassword = () => {
             const res = await changePass(data)
             if (res.responseCode === 200) {
                 toast("Thành công")
-                navigate('/login')
+                setTimeout(() => {
+                    navigate('/login')
+                }, 1000);
             }
             else toast.error("Lỗi");
         } catch (error) {
