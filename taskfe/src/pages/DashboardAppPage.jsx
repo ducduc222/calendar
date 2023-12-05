@@ -28,7 +28,7 @@ export default function DashboardAppPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | TaskTracker+ </title>
+        <title> Dashboard | TimeMentor+ </title>
       </Helmet>
 
       <Container maxWidth="xl">

@@ -51,13 +51,13 @@ const ForgotPassword = () => {
             const res = await sendEmail({ email: email })
             console.log(res);
             if (res.responseCode === 200) {
-                toast.success("Một otp đã được gửi về email của bạn")
+                toast.success("An otp has been sent to your email")
                 handleClick()
             }
-            else toast.error("Lỗi");
+            else toast.error("Error");
 
         } catch (error) {
-            toast.error("Lỗi");
+            toast.error("Error");
         }
     }
     const handleSendOtp = async () => {
@@ -69,13 +69,13 @@ const ForgotPassword = () => {
             const res = await sendOtp(data)
 
             if (res.responseCode === 200) {
-                toast.success("Đã xác nhận otp")
+                toast.success("OTP confirmed")
                 handleClick()
             }
-            else toast.error("Lỗi");
+            else toast.error("Error");
 
         } catch (error) {
-            toast.error("Lỗi");
+            toast.error("Error");
         }
     }
 
@@ -88,14 +88,14 @@ const ForgotPassword = () => {
         try {
             const res = await changePass(data)
             if (res.responseCode === 200) {
-                toast("Thành công")
+                toast("Success")
                 setTimeout(() => {
                     navigate('/login')
                 }, 1000);
             }
-            else toast.error("Lỗi");
+            else toast.error("Error");
         } catch (error) {
-            toast.error("Lỗi");
+            toast.error("Error");
         }
     }
     const handleClick = () => {
@@ -126,36 +126,36 @@ const ForgotPassword = () => {
             )}
             <Container maxWidth="sm" style={{ display: 'flex' }}>
                 <Stack spacing={3} style={{ margin: 'auto', display: activeStack === 1 ? 'flex' : 'none' }}>
-                    <h2>Quên mật khẩu?</h2>
+                    <h2>Forgot password?</h2>
                     <span>
-                        Đừng lo khi điều này xảy ra. Vui lòng nhập email của bạn. Chúng tôi sẽ gửi mã OTP vào vào email này.
+                        Don't worry when this happens. Please enter your email. We will send the OTP code to this email.
                     </span>
                     <TextField id="Email" label="Email" variant="outlined" value={email} onChange={(event) => setEmail(event.target.value)} />
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <Link to="/login" >Quay lại trang đăng nhập</Link>
+                        <Link to="/login" >Go to Login page</Link>
                     </div>
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleSendMail}>
-                        Tiếp tục
+                        Next
                     </LoadingButton>
                 </Stack>
 
                 <Stack spacing={3} style={{ margin: 'auto', display: activeStack === 2 ? 'flex' : 'none' }}>
-                    <h2>Xác thực OTP</h2>
-                    <div>Nhập mã chúng tôi đã gửi đến {email}</div>
+                    <h2>Verify OTP</h2>
+                    <div>Enter the code we sent to {email}</div>
                     <MuiOtpInput length={6} value={otp} onChange={handleChange} />
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" value={otp} onChange={(event) => setOtp(event.target.value)} onClick={handleSendOtp}>
-                        Tiếp tục
+                        Next
                     </LoadingButton>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>Không nhận được mã? <StyledReSend>Gửi lại</StyledReSend></div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>Didn't receive the code?<StyledReSend onClick={handleSendMail(false)}>Resend</StyledReSend></div>
                 </Stack>
 
                 <Stack spacing={3} style={{ margin: 'auto', display: activeStack === 3 ? 'flex' : 'none' }}>
-                    <h2>Cài đặt mật khẩu mới</h2>
-                    <span>Mật khẩu của bạn phải dài từ 8 đến 16 ký tự, phải chứa ít nhất 1 ký tự viết hoa, 1 ký tự viết thường, 1 ký tự số và 1 ký tự đặc biệt</span>
+                    <h2>New password</h2>
+                    <span>Your password must be from 8 to 16 characters long, must contain at least 1 uppercase character, 1 lowercase character, 1 numeric character and 1 special character</span>
                     <TextField id="password" label="Mật khẩu mới" variant="outlined" value={pass} onChange={(event) => setPass(event.target.value)} />
                     <TextField id="confirm-password" label="Xác nhận mật khẩu " variant="outlined" value={vpass} onChange={(event) => setVPass(event.target.value)} />
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleChangePass}>
-                        Xác nhận
+                        Submit
                     </LoadingButton>
                 </Stack>
             </Container>

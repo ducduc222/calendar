@@ -66,7 +66,7 @@ export default function Nav({ openNav, onCloseNav }) {
       <StyledLogo>
         <Logo />
             <Typography variant="subtitle1" sx={{ color: 'text.primary' }}>
-              TaskTracker+
+            TimeMentor+
             </Typography>
       </StyledLogo>
       </Box>
@@ -93,7 +93,7 @@ export default function Nav({ openNav, onCloseNav }) {
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
+      {/* <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
         <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
           <Box
             component="img"
@@ -115,7 +115,7 @@ export default function Nav({ openNav, onCloseNav }) {
             Ask a question
           </Button>
         </Stack>
-      </Box>
+      </Box> */}
     </Scrollbar>
   );
 

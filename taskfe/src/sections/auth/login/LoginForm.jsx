@@ -33,10 +33,10 @@ export default function LoginForm() {
           navigate('/dashboard')
         })
         .catch((err) => {
-          toast.error('Sai thông tin đăng nhập');
+          toast.error('Check your account again');
         })
     } else {
-      toast.error('Email không hợp lệ');
+      toast.error('Check your email again');
     }
   };
 
@@ -53,7 +53,7 @@ export default function LoginForm() {
         <TextField
           inputRef={password}
           name="password"
-          label="Mật khẩu"
+          label="Password"
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -70,15 +70,15 @@ export default function LoginForm() {
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         <Grid>
           <Checkbox name="remember" label="Remember me" />
-          Nhớ mật khẩu
+          Remember password
         </Grid>
         <Link to="/forgot-password" variant="subtitle2" underline="hover">
-          Quên mật khẩu?
+          Forgot password
         </Link>
       </Stack>
 
       <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
-        Đăng nhập
+        Login
       </LoadingButton>
       <ToastContainer />
     </>

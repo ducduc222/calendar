@@ -67,7 +67,7 @@ export default function DashboardAppPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | TaskTracker+ </title>
+        <title> Dashboard | TimeMentor+ </title>
       </Helmet>
 
       <Container maxWidth="xl">
@@ -88,14 +88,19 @@ export default function DashboardAppPage() {
               {/* <CustomizedTimeline /> */}
               <Timeline position="alternate">
 
-                {eventsToday.map((event, index) => (
-                  <CustomizedTimeline
-                    index={index}
-                    time={moment(event.start).format("hh:mm") + " - " + moment(event.end).format("hh:mm")}
-                    icon={<FastfoodIcon />}
-                    title={event.title}
-                    content={event.descripton} />
-                ))}
+                {eventsToday.length == 0 ?
+                  <span>
+                    No events to day...
+                  </span>
+                  :
+                  eventsToday.map((event, index) => (
+                    <CustomizedTimeline
+                      index={index}
+                      time={moment(event.start).format("hh:mm") + " - " + moment(event.end).format("hh:mm")}
+                      icon={<FastfoodIcon />}
+                      title={event.title}
+                      content={event.descripton} />
+                  ))}
               </Timeline>
             </Card>
           </Grid>

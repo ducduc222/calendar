@@ -47,11 +47,11 @@ const StyledContent = styled('div')(({ theme }) => ({
 const validate = (account) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(account.username)) {
-        toast("Email không đúng định dạng")
+        toast("Check email")
         return false;
     }
     if (account.password !== account.verifypassword) {
-        toast("Mật khẩu không khớp")
+        toast("Check password")
         return false;
     }
     return true;
@@ -83,7 +83,7 @@ export default function SignupPage() {
                         const token = res.data.token;
                         const user = res.data.userInfoDto;
                         handleLoggedin(token, user);
-                        toast.success('Đăng ký thành công');
+                        toast.success('Signup thành công');
                         setTimeout(() => {
                             navigate('/dashboard');
                         }, 800);
@@ -131,7 +131,7 @@ export default function SignupPage() {
                 <Container maxWidth="sm">
                     <StyledContent>
                         <Typography variant="h4" gutterBottom>
-                            Đăng ký
+                            Signup
                         </Typography>
 
                         <>
@@ -142,7 +142,7 @@ export default function SignupPage() {
                                     value={account2.password}
                                     onChange={(e) => handleChange("password", e.target.value)}
                                     name="password"
-                                    label="Mật khẩu"
+                                    label="Password"
                                     type={showPassword ? 'text' : 'password'}
                                     InputProps={{
                                         endAdornment: (
@@ -159,7 +159,7 @@ export default function SignupPage() {
                                     value={account2.verifypassword}
                                     onChange={(e) => handleChange("verifypassword", e.target.value)}
                                     name="verifypassword"
-                                    label="Nhập lại mật khẩu"
+                                    label="Re-enter the password"
                                     type={showPassword ? 'text' : 'password'}
                                     InputProps={{
                                         endAdornment: (
@@ -174,13 +174,13 @@ export default function SignupPage() {
                             </Stack>
 
                             <LoadingButton style={{ marginTop: "20px", marginBottom: "20px" }} fullWidth size="large" type="submit" variant="contained" onClick={handleClick}>
-                                Đăng ký
+                                Signup
                             </LoadingButton>
 
                         </>
                         <Typography variant="body2" sx={{ mb: 5 }}>
-                            Bạn đã có tài khoản?
-                            <Link to={"/login"}>Đăng nhập</Link>
+                            Do you have an account?
+                            <Link to={"/login"}>Login</Link>
                         </Typography>
                     </StyledContent>
                 </Container>

@@ -75,12 +75,12 @@ export default function LoginPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Đăng Nhập
+              Login
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
-              Bạn chưa có tài khoản? {''}
-              <Link to={"/signup"} variant="subtitle2">Đăng ký</Link>
+            Do not have an account? {''}
+              <Link to={"/signup"} variant="subtitle2">Signup</Link>
             </Typography>
 
             <Stack direction="row" spacing={2}>
