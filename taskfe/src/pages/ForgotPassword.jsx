@@ -100,7 +100,7 @@ const ForgotPassword = () => {
     }
     const handleClick = () => {
         if (activeStack === 3) {
-            // navigate('/login', { state: { showToast: true, message: 'Cập nhật mật khẩu thành công' } });
+            // navigate('/login', { state: { showToast: true, message: 'Updated password' } });
             navigate('/login');
         } else {
             setActiveStack((prevStack) => {
@@ -146,7 +146,7 @@ const ForgotPassword = () => {
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" value={otp} onChange={(event) => setOtp(event.target.value)} onClick={handleSendOtp}>
                         Next
                     </LoadingButton>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>Didn't receive the code?<StyledReSend onClick={handleSendMail(false)}>Resend</StyledReSend></div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>Didn't receive the code?<StyledReSend onClick={handleSendMail}>Resend</StyledReSend></div>
                 </Stack>
 
                 <Stack spacing={3} style={{ margin: 'auto', display: activeStack === 3 ? 'flex' : 'none' }}>
