@@ -16,6 +16,11 @@ const navConfig = [
     path: '/schedule',
     icon: icon('ic_schedule'),
   },
+  {
+    title: 'task',
+    path: '/task',
+    icon: icon('ic_task'),
+  },
 ];
 
 export default navConfig;

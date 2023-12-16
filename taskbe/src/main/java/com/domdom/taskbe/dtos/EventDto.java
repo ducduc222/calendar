@@ -16,10 +16,12 @@ import java.sql.Timestamp;
 public class EventDto {
     private Integer id;
     private Integer userId;
+    private String status;
     private String title;
     private boolean allDay;
     private long start;
     private long end;
+    private long completeDate;
     private String description;
     private Repeat repeatType;
     private Alert alertType;

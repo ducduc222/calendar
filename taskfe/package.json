@@ -28,6 +28,7 @@
     "antd": "^5.11.4",
     "apexcharts": "^3.44.0",
     "axios": "^1.6.2",
+    "bootstrap": "^5.3.2",
     "change-case": "^5.2.0",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",

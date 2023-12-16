@@ -64,6 +64,7 @@ export default function CalendarForm({ event, handleCloseModal, handleDelete }) 
     end: event ? moment(event.end).valueOf() : moment().add('hours', 1).valueOf(),
     repeatType: event ? event.repeatType : 'NONE',
     alertType: event ? event.alertType : 'NONE',
+    status: event ? event.status : 'New Task',
   })
   const { token } = useContext(AuthContext);
   const [eventColor, setEventColor] = React.useState('#00AB55');

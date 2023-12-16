@@ -22,7 +22,9 @@ public class Event extends BaseEntity{
     private boolean allDay;
     private long start;
     private long end;
+    private long completeDate;
     private String description;
+    private String status;
     @Enumerated(EnumType.STRING)
     @Column(name = "repeat_type")
     private Repeat repeatType;

@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useResponsive from '../hooks/useResponsive';
 import { changePass, sendEmail, sendOtp } from '../services/passwordService';
 import { ToastContainer, toast } from 'react-toastify';
-
+import CircularProgress from '@mui/material/CircularProgress';
 const StyledSection = styled('div')(({ theme }) => ({
     width: '100%',
     maxWidth: 480,
@@ -31,6 +31,7 @@ const StyledReSend = styled('span')`
     }
 `
 const ForgotPassword = () => {
+    const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     // const stackRef1 = useRef(null);
     // const stackRef2 = useRef(null);
@@ -48,9 +49,11 @@ const ForgotPassword = () => {
     const mdUp = useResponsive('up', 'md');
     const handleSendMail = async () => {
         try {
+            setLoading(true);
             const res = await sendEmail({ email: email })
             console.log(res);
             if (res.responseCode === 200) {
+                setLoading(false);
                 toast.success("An otp has been sent to your email")
                 handleClick()
             }
@@ -62,6 +65,7 @@ const ForgotPassword = () => {
     }
     const handleSendOtp = async () => {
         try {
+            setLoading(true);
             const data = {
                 email: email,
                 otp: otp
@@ -69,6 +73,7 @@ const ForgotPassword = () => {
             const res = await sendOtp(data)
 
             if (res.responseCode === 200) {
+                setLoading(false);
                 toast.success("OTP confirmed")
                 handleClick()
             }
@@ -80,6 +85,7 @@ const ForgotPassword = () => {
     }
 
     const handleChangePass = async () => {
+        setLoading(true);
         const data = {
             email: email,
             password: pass,
@@ -88,6 +94,7 @@ const ForgotPassword = () => {
         try {
             const res = await changePass(data)
             if (res.responseCode === 200) {
+                setLoading(false);
                 toast("Success")
                 setTimeout(() => {
                     navigate('/login')
@@ -135,7 +142,7 @@ const ForgotPassword = () => {
                         <Link to="/login" >Go to Login page</Link>
                     </div>
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleSendMail}>
-                        Next
+                        {isLoading ? <CircularProgress style={{border:'none'}} color="inherit" /> : 'Next'}
                     </LoadingButton>
                 </Stack>
 
@@ -144,7 +151,7 @@ const ForgotPassword = () => {
                     <div>Enter the code we sent to {email}</div>
                     <MuiOtpInput length={6} value={otp} onChange={handleChange} />
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" value={otp} onChange={(event) => setOtp(event.target.value)} onClick={handleSendOtp}>
-                        Next
+                        {isLoading ? <CircularProgress style={{border:'none'}} color="inherit" /> : 'Next'}
                     </LoadingButton>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>Didn't receive the code?<StyledReSend onClick={handleSendMail}>Resend</StyledReSend></div>
                 </Stack>
@@ -155,7 +162,7 @@ const ForgotPassword = () => {
                     <TextField id="password" label="Mật khẩu mới" variant="outlined" value={pass} onChange={(event) => setPass(event.target.value)} />
                     <TextField id="confirm-password" label="Xác nhận mật khẩu " variant="outlined" value={vpass} onChange={(event) => setVPass(event.target.value)} />
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" onClick={handleChangePass}>
-                        Submit
+                        {isLoading ? <CircularProgress style={{border:'none'}} color="inherit" /> : 'Submit'}
                     </LoadingButton>
                 </Stack>
             </Container>

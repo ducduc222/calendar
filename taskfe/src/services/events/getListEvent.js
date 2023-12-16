@@ -12,6 +12,7 @@ export const getListEvents = async (data, token) => {
             {
                 headers
             })
+            console.log(res.data);
         return res.data
 
     } catch (error) {
