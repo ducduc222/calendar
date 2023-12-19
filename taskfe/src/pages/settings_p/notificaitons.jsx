@@ -89,7 +89,7 @@ export default function Settings() {
 
       <Tabs value={currentTab} onChange={handleTabChange} indicatorColor="primary" textColor="primary" variant="fullWidth">
         <Tab label="Change Password" />
-        <Tab label="Sync" />
+        {/* <Tab label="Sync" /> */}
       </Tabs>
 
       {currentTab === 0 && (
