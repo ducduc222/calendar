@@ -7,6 +7,7 @@ export const AuthContext = createContext({});
 export const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState(() => localStorage.getItem('token'));
     const [user, setUser] = useState({});
+    const [mode, setMode] = useState('light')
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -35,10 +36,22 @@ export const AuthContextProvider = ({ children }) => {
         setToken(null);
         setUser(null);
     };
+    const handleChangeMode = (isLight) => {
+        if (isLight === true) {
+            console.log("light", isLight);
+            setMode('light')
+        }
+        else {
+            console.log("DARK", isLight);
+            setMode('dark')
+        }
+    }
 
     const value = {
         token,
         user,
+        mode,
+        handleChangeMode,
         handleLoggedin,
         handleLoggedOut
     }

@@ -19,6 +19,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { createAuthHeader } from '../../utils/createAuthHeader';
 import { AuthContext } from '../../context/AuthContext';
+import { ColorModeContext } from '../../theme';
 export default function Settings() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -27,7 +28,8 @@ export default function Settings() {
   const [smsNotification, setSmsNotification] = useState(false);
   const [pushNotification, setPushNotification] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
-
+  const { handleChangeMode } = useContext(AuthContext);
+  const colorMode = useContext(ColorModeContext);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -89,7 +91,7 @@ export default function Settings() {
 
       <Tabs value={currentTab} onChange={handleTabChange} indicatorColor="primary" textColor="primary" variant="fullWidth">
         <Tab label="Change Password" />
-        {/* <Tab label="Sync" /> */}
+        <Tab label="Sync" />
       </Tabs>
 
       {currentTab === 0 && (
@@ -129,39 +131,11 @@ export default function Settings() {
 
       {currentTab === 1 && (
         <Box>
-          <Typography variant="h6" gutterBottom>
-            Sync
-          </Typography>
-
-          <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
-
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:notion-icon'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
-              Connect
-            </Button>
-          </Box>
-
-          <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
-
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:todoist'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
-              Connect
-            </Button>
-          </Box>
-
-          <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
-
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:google-calendar'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
-              Connect
-            </Button>
-          </Box>
-
-          <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
-
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'vscode-icons:file-type-outlook'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
-              Connect
-            </Button>
-          </Box>
-
-
+          <FormControlLabel control={<Switch onChange={(event) => {
+            // console.log(event.target.checked);
+            // handleChangeMode(event.target.checked)
+            colorMode.toggleColorMode();
+          }}/>} label="Light mode" />
         </Box>
       )}
       <ToastContainer />
