@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Box,
   Typography,
@@ -15,7 +15,10 @@ import {
 } from '@mui/material';
 // import { Event, Description, FormatListBulleted, Email } from '@mui/icons-material';
 import Iconify from '../../components/iconify';
-
+import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
+import { createAuthHeader } from '../../utils/createAuthHeader';
+import { AuthContext } from '../../context/AuthContext';
 export default function Settings() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -33,12 +36,47 @@ export default function Settings() {
     console.log('New Password:', newPassword);
     console.log('Confirm Password:', confirmPassword);
 
+
+
+    handleSendOtp(currentPassword, newPassword);
+
     // Reset form fields
     setCurrentPassword('');
     setNewPassword('');
     setConfirmPassword('');
   };
+  const { token } = useContext(AuthContext);
+  const sendEmail = async (oldPassword, newPassword) => {
+    const request = axios.create({
+      baseURL: 'http://localhost:8080',
+    });
+    const headers = createAuthHeader(token);
+    const data = {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword
+    }
+    try {
+      const res = await request.post('auth/change-password', data, {
+        headers
+      })
+      return res.data
+    } catch (error) {
+      console.log('change-password ' + error)
+    }
+  }
+  const handleSendOtp = async (oldPassword, newPassword) => {
+    try {
+      const res = await sendEmail(oldPassword, newPassword)
 
+      if (res.responseCode === 200) {
+        toast.success("Changed password")
+      }
+      else toast.error("Error");
+
+    } catch (error) {
+      toast.error("Error");
+    }
+  }
   const handleTabChange = (event, newValue) => {
     setCurrentTab(newValue);
   };
@@ -51,7 +89,6 @@ export default function Settings() {
 
       <Tabs value={currentTab} onChange={handleTabChange} indicatorColor="primary" textColor="primary" variant="fullWidth">
         <Tab label="Change Password" />
-        <Tab label="Notifications" />
         <Tab label="Sync" />
       </Tabs>
 
@@ -93,93 +130,41 @@ export default function Settings() {
       {currentTab === 1 && (
         <Box>
           <Typography variant="h6" gutterBottom>
-            Email Notifications
-          </Typography>
-
-          <FormControl component="fieldset">
-            <FormGroup>
-              <FormControlLabel
-                control={<Switch checked={emailNotification} onChange={() => setEmailNotification(!emailNotification)} />}
-                label="Receive email notifications"
-              />
-            </FormGroup>
-          </FormControl>
-
-          <Divider sx={{ my: 2 }} />
-
-          <Typography variant="h6" gutterBottom>
-            SMS Notifications
-          </Typography>
-
-          <FormControl component="fieldset">
-            <FormGroup>
-              <FormControlLabel
-                control={<Switch checked={smsNotification} onChange={() => setSmsNotification(!smsNotification)} />}
-                label="Receive SMS notifications"
-              />
-            </FormGroup>
-          </FormControl>
-
-          <Divider sx={{ my: 2 }} />
-
-          <Typography variant="h6" gutterBottom>
-            Push Notifications
-          </Typography>
-
-          <FormControl component="fieldset">
-            <FormGroup>
-              <FormControlLabel
-                control={<Switch checked={pushNotification} onChange={() => setPushNotification(!pushNotification)} />}
-                label="Receive push notifications"
-              />
-            </FormGroup>
-          </FormControl>
-
-          <Divider sx={{ my: 2 }} />
-
-          <Button variant="contained" sx={{ mt: 3 }}>
-            Save Changes
-          </Button>
-        </Box>
-      )}
-
-      {currentTab === 2 && (
-        <Box>
-          <Typography variant="h6" gutterBottom>
             Sync
           </Typography>
 
           <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
 
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:notion-icon'}/>} sx={{ ml: 1 }} href="http://localhost:3000/404">
+            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:notion-icon'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
               Connect
             </Button>
           </Box>
 
           <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
 
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:todoist'}/>} sx={{ ml: 1 }} href="http://localhost:3000/404">
+            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:todoist'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
               Connect
             </Button>
           </Box>
 
           <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
 
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:google-calendar'}/>} sx={{ ml: 1 }}href="http://localhost:3000/404">
+            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'logos:google-calendar'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
               Connect
             </Button>
           </Box>
 
           <Box display="flex" alignItems="center" justifyContent="space-between" marginBottom={2}>
 
-            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'vscode-icons:file-type-outlook'}/>} sx={{ ml: 1 }} href="http://localhost:3000/404">
+            <Button variant="outlined" size="medium" startIcon={<Iconify icon={'vscode-icons:file-type-outlook'} />} sx={{ ml: 1 }} href="http://localhost:3000/404">
               Connect
             </Button>
           </Box>
 
-          
+
         </Box>
       )}
+      <ToastContainer />
     </Box>
   );
 }

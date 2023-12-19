@@ -7,6 +7,7 @@ import com.domdom.taskbe.dtos.auth.AuthDto;
 import com.domdom.taskbe.dtos.auth.AuthResponse;
 import com.domdom.taskbe.dtos.auth.UserInfoDto;
 import com.domdom.taskbe.dtos.auth.VerifyTokenRequest;
+import com.domdom.taskbe.dtos.password.ChangePassword;
 import com.domdom.taskbe.models.UserEntity;
 import com.domdom.taskbe.repositories.UserRepository;
 import com.domdom.taskbe.services.UserService;
@@ -75,5 +76,20 @@ public class AuthController {
                                     .data(userInfoDto)
                                     .message("token is valid")
                                     .build());
+    }
+
+    @PostMapping("change-password")
+    public ResponseEntity<ResponseObject> changePassword(
+            @RequestBody @Valid ChangePassword changePassword,@AuthenticationPrincipal UserDetails userDetails
+            ) {
+        String emailUser = userDetails.getUsername();
+        UserEntity userEntity = userRepository.findByEmail(emailUser);
+        UserInfoDto user = authService.changePassword(changePassword, userEntity);
+
+        return ResponseEntity.ok(ResponseObject.builder()
+                .responseCode(200)
+                .message("updated user")
+                .data(user)
+                .build());
     }
 }

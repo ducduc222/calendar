@@ -21,6 +21,11 @@ const navConfig = [
     path: '/task',
     icon: icon('ic_task'),
   },
+  {
+    title: 'setting',
+    path: '/setting',
+    icon: icon('ic_dashboard'),
+  },
 ];
 
 export default navConfig;
