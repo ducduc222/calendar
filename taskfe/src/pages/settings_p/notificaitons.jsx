@@ -135,7 +135,8 @@ export default function Settings() {
             // console.log(event.target.checked);
             // handleChangeMode(event.target.checked)
             colorMode.toggleColorMode();
-          }}/>} label="Light mode" />
+            
+          }}/>} defaultChecked={localStorage.getItem("theme")==='light'} label="Light mode" />
         </Box>
       )}
       <ToastContainer />

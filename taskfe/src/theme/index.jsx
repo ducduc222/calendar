@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useContext, useMemo, useState } from 'react';
 // @mui
@@ -20,27 +20,45 @@ ThemeProvider.propTypes = {
 export const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
 
 export default function ThemeProvider({ children }) {
-  const [mode, setMode] = useState('light');
+  useEffect(() => {
+    if (localStorage.getItem('theme')) {
+      console.log("useEfeect", localStorage.getItem('theme'));
+      setMode(localStorage.getItem('theme'))
+    }
+  }, [])
+  const [mode2, setMode] = useState(localStorage.getItem('theme'));
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode(mode === 'light' ? 'dark':'light');
-        console.log(mode);
+
+        if (localStorage.getItem('theme') === 'light') {
+          setMode('dark');
+          localStorage.setItem('theme', 'dark')
+          console.log("toggle",localStorage.getItem('theme'));
+        }
+        else {
+          localStorage.setItem('theme', 'light')
+          setMode('light');
+          console.log("toggle",localStorage.getItem('theme'));
+
+        }
+
       },
     }),
+
     [],
   );
   const themeOptions = useMemo(
     () => ({
       palette: {
-        mode: mode,
+        mode: mode2 !== '' ? mode2 : 'light',
       },
       shape: { borderRadius: 6 },
       typography,
       shadows: shadows(),
       customShadows: customShadows(),
     }),
-    []
+    [mode2]
   );
 
 
