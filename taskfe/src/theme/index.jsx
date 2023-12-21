@@ -24,6 +24,9 @@ export default function ThemeProvider({ children }) {
     if (localStorage.getItem('theme')) {
       console.log("useEfeect", localStorage.getItem('theme'));
       setMode(localStorage.getItem('theme'))
+    } else {
+      localStorage.setItem('theme', 'light');
+      setMode('light')
     }
   }, [])
   const [mode2, setMode] = useState(localStorage.getItem('theme'));
