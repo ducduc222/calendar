@@ -68,7 +68,7 @@ const COLOR_OPTIONS = [
 
 export default function Calendar() {
 
-  const [event, setEvent] = useState(events);
+  const [event, setEvent] = useState();
 
   const [open, setOpen] = useState(false);
 
@@ -207,7 +207,7 @@ export default function Calendar() {
                 startIcon={<Iconify icon={'eva:plus-fill'} width={20} height={20} />}
                 onClick={handleAddEvent}
               >
-                New Event
+                New Task
               </Button>
             </Stack>
 

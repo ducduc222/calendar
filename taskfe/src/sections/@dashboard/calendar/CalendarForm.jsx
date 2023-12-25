@@ -173,7 +173,7 @@ export default function CalendarForm({ event, handleCloseModal, handleDelete }) 
             </LocalizationProvider>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={6}>
+          {/* <Grid item xs={12} sm={6} md={6}>
             <TextField
               id="outlined-select-currency"
               select
@@ -204,7 +204,7 @@ export default function CalendarForm({ event, handleCloseModal, handleDelete }) 
               <MenuItem value={"EVERY_WEEK"} >EVERY_WEEK</MenuItem>
               <MenuItem value={"EVERY_MONTH"} >EVERY_MONTH</MenuItem>
             </TextField>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} sm={6} md={12}>
             <TextField

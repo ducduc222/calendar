@@ -16,8 +16,8 @@ const chatItems = [
   },
   {
     id: 2,
-    question: 'What payment methods do you accept?',
-    answer: 'We accept major credit cards such as Visa, Mastercard, and American Express.',
+    question: 'How to update the status of tasks?',
+    answer: 'Go to the Task section then select the task that needs to be updated and update it',
   },
   // Add more chat items here
 ];

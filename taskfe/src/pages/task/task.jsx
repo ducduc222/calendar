@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Box, Paper, Grid, Tabs, Tab, Typography, Container, Badge } from '@mui/material'
+import { Box, Paper, Grid, Tabs, Tab, Typography, Container, Badge, DialogTitle } from '@mui/material'
 import data from './data';
 import TaskItem from './TaskItem';
 import TaskDetail from './TaskDetail';
@@ -20,8 +20,10 @@ import { getListEvents } from '../../services/events/getListEvent';
 import { ToastContainer, toast } from 'react-toastify';
 import { updateEvent } from '../../services/events/createEvent';
 
-
-
+import { Button } from '@mui/material';
+import Iconify from '../../components/iconify/Iconify';
+import { DialogAnimate } from '../../components/animate';
+import { CalendarForm } from '../../sections/@dashboard/calendar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -156,6 +158,18 @@ const Task = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+
+  const [openNewEvent, setOPenNewEvent] = useState(false);
+  const handleCloseModal = (messageToast, eventNew) => {
+    if (messageToast != null) {
+      toast.success(messageToast);
+      const startDate = moment().startOf('years').startOf('days').valueOf();
+      const endDate = moment().endOf('months').valueOf();
+      fetchData(startDate, endDate);
+    }
+    setOPenNewEvent(false);
+  };
   return (
     <Page title="Task">
       <Container >
@@ -164,7 +178,13 @@ const Task = () => {
           links={[{ name: 'Dashboard', href: '' }, { name: 'Task' }]}
           action={
 
-            <Filter />
+            <Button
+              variant="contained"
+              startIcon={<Iconify icon={'eva:plus-fill'} width={20} height={20} />}
+              onClick={() => setOPenNewEvent(true)}
+            >
+              New Task
+            </Button>
           }
         />
         <Grid container spacing={2}>
@@ -203,6 +223,16 @@ const Task = () => {
         </Grid>
 
       </Container>
+      <DialogAnimate open={openNewEvent} onClose={() => handleCloseModal()} >
+        <DialogTitle variant='h3' sx={{ fontStyle: 'normal', color: '#48409E', }}>
+          New Task
+        </DialogTitle>
+        <CalendarForm handleCloseModal={handleCloseModal} />
+        {/* <DialogActions sx={{ margin: '24px'}} >
+            <Button variant="outlined" color="error" autoFocus onClick={handleCloseModal}>Cancel</Button>
+            <Button variant="outlined" onClick={()=>console.log(selectedEvent)}>Save change</Button>
+          </DialogActions> */}
+      </DialogAnimate>
       <ToastContainer />
     </Page>
   );

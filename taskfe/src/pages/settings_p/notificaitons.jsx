@@ -91,7 +91,7 @@ export default function Settings() {
 
       <Tabs value={currentTab} onChange={handleTabChange} indicatorColor="primary" textColor="primary" variant="fullWidth">
         <Tab label="Change Password" />
-        <Tab label="Sync" />
+        <Tab label="Theme" />
       </Tabs>
 
       {currentTab === 0 && (
@@ -136,7 +136,7 @@ export default function Settings() {
             // handleChangeMode(event.target.checked)
             colorMode.toggleColorMode();
             
-          }}/>} defaultChecked={localStorage.getItem("theme")==='light'} label="Light mode" />
+          }}/>} defaultChecked={localStorage.getItem("theme")==='light'} label="Dark mode" />
         </Box>
       )}
       <ToastContainer />
